@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Our Little Family — a tiny pixel-art love letter."
+    />
+    <meta name="theme-color" content="#fffdfd" />
+    <title>Our Little Family</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="floating-hearts" aria-hidden="true"></div>
+
+    <main class="love-page">
+      <header class="intro">
+        <p class="player-label">PLAYER 1 + PLAYER 2</p>
+        <h1>Our Little Family</h1>
+        <p class="love-note">Every day with you is my favorite adventure.</p>
+        <div class="tiny-hearts" aria-hidden="true">
+          <span>♥</span><span>♥</span><span>♥</span>
+        </div>
+      </header>
+
+      <section class="portrait-card" aria-label="Our pixel-art family portrait">
+        <span class="pixel-corner corner-one" aria-hidden="true">+</span>
+        <span class="pixel-corner corner-two" aria-hidden="true">+</span>
+
+        <div class="portrait-stage">
+          <img
+            class="family-art"
+            src="family.png"
+            alt="A pixel-art portrait of our family standing together"
+          />
+          <img
+            class="dog-art"
+            src="dog.png"
+            alt="Our happy pixel-art dog standing with the family"
+          />
+        </div>
+
+        <p class="portrait-caption">HOME IS WHEREVER I'M WITH YOU</p>
+
+        <button
+          class="secret-button"
+          type="button"
+          aria-label="Open a tiny hidden surprise"
+          aria-haspopup="dialog"
+        >
+          <span aria-hidden="true">✦</span>
+        </button>
+      </section>
+
+      <footer>
+        <p>Made with love by your husband <span aria-hidden="true">♥</span></p>
+      </footer>
+    </main>
+
+    <dialog class="love-dialog" aria-labelledby="love-dialog-title">
+      <div class="dialog-card">
+        <button class="dialog-close" type="button" aria-label="Close surprise">
+          ×
+        </button>
+        <div class="dialog-heart" aria-hidden="true">♥</div>
+        <p class="dialog-kicker">A SECRET MESSAGE</p>
+        <h2 id="love-dialog-title">I love you!</h2>
+        <p class="dialog-copy">More than all the extra lives in the world.</p>
+        <button class="dialog-ok" type="button">Love you too ♥</button>
+        <div class="heart-burst" aria-hidden="true"></div>
+      </div>
+    </dialog>
+  </body>
+</html>

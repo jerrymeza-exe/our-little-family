@@ -1,0 +1,458 @@
+:root {
+  --ink: #332b35;
+  --muted: #716675;
+  --pink: #f277a8;
+  --pink-dark: #d94f88;
+  --pink-soft: #ffe6f0;
+  --lavender: #bca7e8;
+  --lavender-soft: #f1ebff;
+  --cream: #fff9ef;
+  --paper: #fffdfd;
+  --pixel-font: "Press Start 2P", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 218, 233, 0.3) 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 30%, rgba(195, 177, 235, 0.22) 0 2px, transparent 3px),
+    var(--paper);
+  background-size: 72px 72px, 96px 96px, auto;
+  font-family: var(--pixel-font);
+}
+
+button {
+  font: inherit;
+}
+
+.love-page {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 920px);
+  margin: 0 auto;
+  padding: clamp(3.25rem, 8vw, 6.5rem) 1.25rem 2rem;
+  text-align: center;
+}
+
+.intro {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto clamp(2rem, 5vw, 3.25rem);
+}
+
+.player-label {
+  margin: 0 0 1.15rem;
+  color: var(--pink-dark);
+  font-size: clamp(0.5rem, 1.7vw, 0.68rem);
+  letter-spacing: 0.14em;
+  line-height: 1.7;
+}
+
+h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.75rem, 6.2vw, 4rem);
+  line-height: 1.3;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  text-shadow:
+    3px 3px 0 var(--pink-soft),
+    6px 6px 0 var(--lavender-soft);
+}
+
+.love-note {
+  max-width: 680px;
+  margin: 1.6rem auto 0;
+  color: var(--muted);
+  font-size: clamp(0.67rem, 2vw, 0.88rem);
+  line-height: 2;
+  text-wrap: balance;
+}
+
+.tiny-hearts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.35rem;
+  color: var(--pink);
+  font-size: 0.78rem;
+}
+
+.tiny-hearts span:nth-child(2) {
+  color: var(--lavender);
+  font-size: 0.6rem;
+}
+
+.portrait-card {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(0.75rem, 2.5vw, 1.25rem);
+  border: 4px solid var(--ink);
+  background: #fff;
+  box-shadow:
+    8px 8px 0 var(--pink-soft),
+    12px 12px 0 var(--ink);
+}
+
+.portrait-card::before {
+  position: absolute;
+  inset: 9px;
+  z-index: 3;
+  border: 2px dashed #f3cadb;
+  content: "";
+  pointer-events: none;
+}
+
+.pixel-corner {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  color: var(--pink-dark);
+  background: #fff;
+  font-size: 0.72rem;
+}
+
+.corner-one {
+  top: -14px;
+  left: 25px;
+}
+
+.corner-two {
+  right: 25px;
+  bottom: -14px;
+  color: #866bc1;
+}
+
+.portrait-stage {
+  position: relative;
+  width: 100%;
+  height: clamp(470px, 79vw, 700px);
+  overflow: hidden;
+  isolation: isolate;
+  background: #fff;
+}
+
+.family-art,
+.dog-art {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.family-art {
+  bottom: 0;
+  left: 40%;
+  z-index: 1;
+  width: auto;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.dog-art {
+  right: 0.5%;
+  bottom: 3.5%;
+  z-index: 2;
+  width: clamp(180px, 31vw, 245px);
+  height: auto;
+}
+
+.portrait-caption {
+  position: relative;
+  z-index: 4;
+  margin: 0;
+  padding: 1.25rem 3.5rem 1rem;
+  color: #725a7f;
+  background: linear-gradient(90deg, transparent, var(--lavender-soft), transparent);
+  font-size: clamp(0.5rem, 1.6vw, 0.67rem);
+  line-height: 1.75;
+  letter-spacing: 0.07em;
+}
+
+.secret-button {
+  position: absolute;
+  right: 9px;
+  bottom: 8px;
+  z-index: 8;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  place-items: center;
+  color: #eadbe8;
+  background: transparent;
+  cursor: pointer;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.secret-button span {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+
+.secret-button:hover,
+.secret-button:focus-visible {
+  color: var(--pink-dark);
+  transform: rotate(18deg) scale(1.18);
+}
+
+.secret-button:focus-visible,
+.dialog-close:focus-visible,
+.dialog-ok:focus-visible {
+  outline: 3px solid var(--lavender);
+  outline-offset: 3px;
+}
+
+footer {
+  padding: 2.75rem 0 0.5rem;
+  color: #887d8b;
+  font-size: clamp(0.5rem, 1.5vw, 0.64rem);
+  line-height: 1.8;
+}
+
+footer span {
+  color: var(--pink-dark);
+}
+
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -40px;
+  color: var(--heart-color, var(--pink));
+  font-family: var(--pixel-font);
+  opacity: 0;
+  animation: float-up var(--float-duration, 8s) linear forwards;
+  filter: drop-shadow(2px 2px 0 rgba(64, 43, 60, 0.1));
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+  12% {
+    opacity: 0.62;
+  }
+  78% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--heart-drift, 20px), -110vh, 0) rotate(14deg);
+  }
+}
+
+.love-dialog {
+  width: min(90vw, 480px);
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  color: var(--ink);
+  background: transparent;
+}
+
+.love-dialog::backdrop {
+  background: rgba(55, 42, 57, 0.42);
+  backdrop-filter: blur(3px);
+}
+
+.dialog-card {
+  position: relative;
+  padding: 3.4rem clamp(1.5rem, 6vw, 3rem) 2.5rem;
+  border: 4px solid var(--ink);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    repeating-linear-gradient(0deg, var(--pink-soft) 0 8px, var(--lavender-soft) 8px 16px);
+  text-align: center;
+  box-shadow:
+    8px 8px 0 var(--pink),
+    12px 12px 0 var(--ink);
+  animation: card-in 220ms steps(4, end);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dialog-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  place-items: center;
+  color: var(--ink);
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dialog-heart {
+  color: var(--pink-dark);
+  font-size: 2.1rem;
+  line-height: 1;
+  filter: drop-shadow(4px 4px 0 var(--pink-soft));
+}
+
+.dialog-kicker {
+  margin: 1.3rem 0 0.85rem;
+  color: #866bc1;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+}
+
+.dialog-card h2 {
+  margin: 0;
+  color: var(--pink-dark);
+  font-size: clamp(1.45rem, 7vw, 2.3rem);
+  line-height: 1.5;
+  text-shadow: 3px 3px 0 var(--pink-soft);
+}
+
+.dialog-copy {
+  margin: 1rem 0 1.75rem;
+  color: var(--muted);
+  font-size: clamp(0.52rem, 2.2vw, 0.65rem);
+  line-height: 1.9;
+}
+
+.dialog-ok {
+  min-height: 48px;
+  padding: 0.85rem 1.1rem;
+  border: 3px solid var(--ink);
+  color: #fff;
+  background: var(--pink-dark);
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: 0.58rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.dialog-ok:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.burst-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  color: var(--burst-color, var(--pink));
+  font-size: var(--burst-size, 1rem);
+  animation: heart-burst 750ms ease-out forwards;
+}
+
+@keyframes heart-burst {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y))) scale(1.2);
+  }
+}
+
+@media (max-width: 620px) {
+  .love-page {
+    padding-inline: 0.9rem;
+  }
+
+  .portrait-card {
+    padding: 0.55rem;
+    border-width: 3px;
+    box-shadow:
+      6px 6px 0 var(--pink-soft),
+      9px 9px 0 var(--ink);
+  }
+
+  .portrait-stage {
+    height: clamp(430px, 139vw, 640px);
+  }
+
+  .family-art {
+    left: 38%;
+    height: 98%;
+  }
+
+  .dog-art {
+    right: -1%;
+    bottom: 3%;
+    width: min(39vw, 190px);
+  }
+
+  .portrait-caption {
+    padding: 1rem 2.7rem 0.9rem 0.75rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .portrait-stage {
+    height: 430px;
+  }
+
+  .family-art {
+    left: 36%;
+  }
+
+  .dog-art {
+    right: -3%;
+    width: 145px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .floating-hearts {
+    display: none;
+  }
+}

@@ -4,15 +4,15 @@ const loveDialog = document.querySelector(".love-dialog");
 const closeButton = document.querySelector(".dialog-close");
 const okayButton = document.querySelector(".dialog-ok");
 const heartBurst = document.querySelector(".heart-burst");
-const memoryTrack = document.querySelector(".memory-track");
-const memoryViewport = document.querySelector(".memory-viewport");
-const memorySlides = [...document.querySelectorAll(".memory-slide")];
-const memoryDots = [...document.querySelectorAll(".carousel-dot")];
-const previousMemoryButton = document.querySelector(".carousel-prev");
-const nextMemoryButton = document.querySelector(".carousel-next");
+const portraitTrack = document.querySelector(".portrait-track");
+const portraitViewport = document.querySelector(".portrait-viewport");
+const portraitSlides = [...document.querySelectorAll(".portrait-slide")];
+const portraitDots = [...document.querySelectorAll(".portrait-dot")];
+const previousPortraitButton = document.querySelector(".portrait-prev");
+const nextPortraitButton = document.querySelector(".portrait-next");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-let activeMemory = 0;
+let activePortrait = 0;
 let swipeStartX = 0;
 let lastSecretTrigger = null;
 
@@ -90,20 +90,20 @@ function closeSurprise() {
   lastSecretTrigger?.focus();
 }
 
-function showMemory(index) {
-  if (!memoryTrack || memorySlides.length === 0) return;
+function showPortrait(index) {
+  if (!portraitTrack || portraitSlides.length === 0) return;
 
-  activeMemory = (index + memorySlides.length) % memorySlides.length;
-  memoryTrack.style.transform = `translateX(-${activeMemory * 100}%)`;
+  activePortrait = (index + portraitSlides.length) % portraitSlides.length;
+  portraitTrack.style.transform = `translateX(-${activePortrait * 100}%)`;
 
-  memorySlides.forEach((slide, slideIndex) => {
-    const isActive = slideIndex === activeMemory;
+  portraitSlides.forEach((slide, slideIndex) => {
+    const isActive = slideIndex === activePortrait;
     slide.classList.toggle("is-active", isActive);
     slide.setAttribute("aria-hidden", String(!isActive));
   });
 
-  memoryDots.forEach((dot, dotIndex) => {
-    const isActive = dotIndex === activeMemory;
+  portraitDots.forEach((dot, dotIndex) => {
+    const isActive = dotIndex === activePortrait;
     dot.classList.toggle("is-active", isActive);
     dot.setAttribute("aria-current", String(isActive));
   });
@@ -113,32 +113,32 @@ secretButtons.forEach((button) => button.addEventListener("click", openSurprise)
 closeButton.addEventListener("click", closeSurprise);
 okayButton.addEventListener("click", closeSurprise);
 
-previousMemoryButton?.addEventListener("click", () => showMemory(activeMemory - 1));
-nextMemoryButton?.addEventListener("click", () => showMemory(activeMemory + 1));
-memoryDots.forEach((dot, index) => {
-  dot.addEventListener("click", () => showMemory(index));
+previousPortraitButton?.addEventListener("click", () => showPortrait(activePortrait - 1));
+nextPortraitButton?.addEventListener("click", () => showPortrait(activePortrait + 1));
+portraitDots.forEach((dot, index) => {
+  dot.addEventListener("click", () => showPortrait(index));
 });
 
-memoryViewport?.addEventListener("keydown", (event) => {
+portraitViewport?.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     event.preventDefault();
-    showMemory(activeMemory - 1);
+    showPortrait(activePortrait - 1);
   }
 
   if (event.key === "ArrowRight") {
     event.preventDefault();
-    showMemory(activeMemory + 1);
+    showPortrait(activePortrait + 1);
   }
 });
 
-memoryViewport?.addEventListener("touchstart", (event) => {
+portraitViewport?.addEventListener("touchstart", (event) => {
   swipeStartX = event.changedTouches[0].clientX;
 }, { passive: true });
 
-memoryViewport?.addEventListener("touchend", (event) => {
+portraitViewport?.addEventListener("touchend", (event) => {
   const swipeDistance = event.changedTouches[0].clientX - swipeStartX;
   if (Math.abs(swipeDistance) < 45) return;
-  showMemory(activeMemory + (swipeDistance < 0 ? 1 : -1));
+  showPortrait(activePortrait + (swipeDistance < 0 ? 1 : -1));
 }, { passive: true });
 
 loveDialog.addEventListener("click", (event) => {

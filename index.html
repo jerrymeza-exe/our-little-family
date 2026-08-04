@@ -31,120 +31,107 @@
         </div>
       </header>
 
-      <section class="portrait-card" aria-label="Our pixel-art family portrait">
-        <span class="pixel-corner corner-one" aria-hidden="true">+</span>
-        <span class="pixel-corner corner-two" aria-hidden="true">+</span>
-
-        <div class="portrait-stage">
-          <img
-            class="scene-art"
-            src="sunset-background.png"
-            alt=""
-            aria-hidden="true"
-          />
-          <img
-            class="family-art"
-            src="family-transparent.png"
-            alt="A pixel-art portrait of our family standing together"
-          />
-          <img
-            class="dog-art"
-            src="dog-transparent.png"
-            alt="Our happy pixel-art dog standing with the family"
-          />
-        </div>
-
-        <p class="portrait-caption">HOME IS WHEREVER I'M WITH YOU</p>
-
-        <button
-          class="secret-button"
-          type="button"
-          data-secret-trigger
-          aria-label="Open a tiny hidden surprise"
-          aria-haspopup="dialog"
+      <section
+        class="portrait-carousel"
+        aria-label="Our pixel-art family memories"
+        aria-roledescription="carousel"
+      >
+        <div
+          class="portrait-viewport"
+          tabindex="0"
+          aria-label="Swipe horizontally or use the arrow keys to change photos."
         >
-          <span aria-hidden="true">✦</span>
-        </button>
-      </section>
+          <div class="portrait-track">
+            <article
+              class="portrait-slide is-active"
+              aria-roledescription="slide"
+              aria-label="1 of 2"
+              aria-hidden="false"
+            >
+              <div class="portrait-card">
+                <span class="pixel-corner corner-one" aria-hidden="true">+</span>
+                <span class="pixel-corner corner-two" aria-hidden="true">+</span>
 
-      <section class="memories" aria-labelledby="memories-title">
-        <div class="memories-heading">
-          <p class="section-kicker">MEMORY SELECT</p>
-          <h2 id="memories-title">Little Moments, Big Love</h2>
-          <p>Swipe through a few favorite members of our party.</p>
+                <div class="portrait-stage">
+                  <img
+                    class="scene-art"
+                    src="sunset-background.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <img
+                    class="family-art"
+                    src="family-transparent.png"
+                    alt="A pixel-art portrait of our family standing together"
+                  />
+                  <img
+                    class="dog-art"
+                    src="dog-transparent.png"
+                    alt="Our happy pixel-art dog standing with the family"
+                  />
+                </div>
+
+                <p class="portrait-caption">HOME IS WHEREVER I'M WITH YOU</p>
+
+                <button
+                  class="secret-button"
+                  type="button"
+                  data-secret-trigger
+                  aria-label="Open a tiny hidden surprise"
+                  aria-haspopup="dialog"
+                >
+                  <span aria-hidden="true">✦</span>
+                </button>
+              </div>
+            </article>
+
+            <article
+              class="portrait-slide"
+              aria-roledescription="slide"
+              aria-label="2 of 2"
+              aria-hidden="true"
+            >
+              <div class="portrait-card">
+                <span class="pixel-corner corner-one" aria-hidden="true">+</span>
+                <span class="pixel-corner corner-two" aria-hidden="true">+</span>
+
+                <div class="portrait-stage second-memory-stage">
+                  <img
+                    class="second-memory-art"
+                    src="birthday-family.png"
+                    alt="Our family together for a special birthday memory"
+                  />
+                </div>
+
+                <p class="portrait-caption">ANOTHER MEMORY WORTH REPLAYING</p>
+
+                <button
+                  class="secret-button"
+                  type="button"
+                  data-secret-trigger
+                  aria-label="Open a tiny hidden surprise"
+                  aria-haspopup="dialog"
+                >
+                  <span aria-hidden="true">✦</span>
+                </button>
+              </div>
+            </article>
+          </div>
         </div>
 
-        <div class="memory-carousel" aria-roledescription="carousel">
-          <div
-            class="memory-viewport"
-            tabindex="0"
-            aria-label="Family memories. Use the arrow keys or swipe to change slides."
-          >
-            <div class="memory-track">
-              <article
-                class="memory-slide is-active"
-                aria-roledescription="slide"
-                aria-label="1 of 2"
-                aria-hidden="false"
-              >
-                <div class="memory-frame">
-                  <span class="memory-tape" aria-hidden="true"></span>
-                  <div class="memory-image family-memory">
-                    <img
-                      src="family.png"
-                      alt="Our pixel-art family posing together"
-                    />
-                  </div>
-                  <div class="memory-copy">
-                    <span>MEMORY 01</span>
-                    <h3>Our favorite adventure</h3>
-                    <p>Every level is better when we play it together.</p>
-                  </div>
-                </div>
-              </article>
-
-              <article
-                class="memory-slide"
-                aria-roledescription="slide"
-                aria-label="2 of 2"
-                aria-hidden="true"
-              >
-                <div class="memory-frame">
-                  <span class="memory-tape" aria-hidden="true"></span>
-                  <div class="memory-image dog-memory">
-                    <img
-                      src="dog.png"
-                      alt="Our happy dog in pixel art"
-                    />
-                  </div>
-                  <div class="memory-copy">
-                    <span>MEMORY 02</span>
-                    <h3>The sweetest sidekick</h3>
-                    <p>Our little party would not be complete without you.</p>
-                  </div>
-                </div>
-              </article>
-            </div>
+        <div class="portrait-carousel-controls">
+          <button class="portrait-arrow portrait-prev" type="button" aria-label="Previous photo">
+            <span aria-hidden="true">&lt;</span>
+          </button>
+          <div class="portrait-dots" aria-label="Choose a photo">
+            <button class="portrait-dot is-active" type="button" aria-label="Show photo 1" aria-current="true"></button>
+            <button class="portrait-dot" type="button" aria-label="Show photo 2" aria-current="false"></button>
           </div>
-
-          <div class="carousel-controls">
-            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous memory">
-              <span aria-hidden="true">&lt;</span>
-            </button>
-            <div class="carousel-dots" aria-label="Choose a memory">
-              <button class="carousel-dot is-active" type="button" aria-label="Show memory 1" aria-current="true"></button>
-              <button class="carousel-dot" type="button" aria-label="Show memory 2" aria-current="false"></button>
-            </div>
-            <button class="carousel-arrow carousel-next" type="button" aria-label="Next memory">
-              <span aria-hidden="true">&gt;</span>
-            </button>
-          </div>
+          <button class="portrait-arrow portrait-next" type="button" aria-label="Next photo">
+            <span aria-hidden="true">&gt;</span>
+          </button>
         </div>
-
-        <button class="memory-secret" type="button" data-secret-trigger aria-haspopup="dialog">
-          <span aria-hidden="true">♥</span>
-          Open a secret memory
-        </button>
+        <p class="swipe-hint" aria-hidden="true">SWIPE FOR ANOTHER MEMORY →</p>
       </section>
 
       <footer>

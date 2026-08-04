@@ -1,10 +1,20 @@
 const heartLayer = document.querySelector(".floating-hearts");
-const secretButton = document.querySelector(".secret-button");
+const secretButtons = document.querySelectorAll("[data-secret-trigger]");
 const loveDialog = document.querySelector(".love-dialog");
 const closeButton = document.querySelector(".dialog-close");
 const okayButton = document.querySelector(".dialog-ok");
 const heartBurst = document.querySelector(".heart-burst");
+const memoryTrack = document.querySelector(".memory-track");
+const memoryViewport = document.querySelector(".memory-viewport");
+const memorySlides = [...document.querySelectorAll(".memory-slide")];
+const memoryDots = [...document.querySelectorAll(".carousel-dot")];
+const previousMemoryButton = document.querySelector(".carousel-prev");
+const nextMemoryButton = document.querySelector(".carousel-next");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+let activeMemory = 0;
+let swipeStartX = 0;
+let lastSecretTrigger = null;
 
 const heartColors = ["#f277a8", "#d94f88", "#bca7e8", "#f6a9c5"];
 
@@ -67,7 +77,8 @@ function createHeartBurst() {
   });
 }
 
-function openSurprise() {
+function openSurprise(event) {
+  lastSecretTrigger = event?.currentTarget || null;
   if (!loveDialog.open) {
     loveDialog.showModal();
     createHeartBurst();
@@ -76,12 +87,59 @@ function openSurprise() {
 
 function closeSurprise() {
   loveDialog.close();
-  secretButton.focus();
+  lastSecretTrigger?.focus();
 }
 
-secretButton.addEventListener("click", openSurprise);
+function showMemory(index) {
+  if (!memoryTrack || memorySlides.length === 0) return;
+
+  activeMemory = (index + memorySlides.length) % memorySlides.length;
+  memoryTrack.style.transform = `translateX(-${activeMemory * 100}%)`;
+
+  memorySlides.forEach((slide, slideIndex) => {
+    const isActive = slideIndex === activeMemory;
+    slide.classList.toggle("is-active", isActive);
+    slide.setAttribute("aria-hidden", String(!isActive));
+  });
+
+  memoryDots.forEach((dot, dotIndex) => {
+    const isActive = dotIndex === activeMemory;
+    dot.classList.toggle("is-active", isActive);
+    dot.setAttribute("aria-current", String(isActive));
+  });
+}
+
+secretButtons.forEach((button) => button.addEventListener("click", openSurprise));
 closeButton.addEventListener("click", closeSurprise);
 okayButton.addEventListener("click", closeSurprise);
+
+previousMemoryButton?.addEventListener("click", () => showMemory(activeMemory - 1));
+nextMemoryButton?.addEventListener("click", () => showMemory(activeMemory + 1));
+memoryDots.forEach((dot, index) => {
+  dot.addEventListener("click", () => showMemory(index));
+});
+
+memoryViewport?.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    showMemory(activeMemory - 1);
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    showMemory(activeMemory + 1);
+  }
+});
+
+memoryViewport?.addEventListener("touchstart", (event) => {
+  swipeStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+
+memoryViewport?.addEventListener("touchend", (event) => {
+  const swipeDistance = event.changedTouches[0].clientX - swipeStartX;
+  if (Math.abs(swipeDistance) < 45) return;
+  showMemory(activeMemory + (swipeDistance < 0 ? 1 : -1));
+}, { passive: true });
 
 loveDialog.addEventListener("click", (event) => {
   if (event.target === loveDialog) closeSurprise();

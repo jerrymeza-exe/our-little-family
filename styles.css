@@ -543,7 +543,7 @@ footer span {
   }
 
   .portrait-stage {
-    height: clamp(430px, 139vw, 640px);
+    height: clamp(345px, 108vw, 560px);
   }
 
   .family-art {
@@ -572,7 +572,7 @@ footer span {
 
 @media (max-width: 390px) {
   .portrait-stage {
-    height: 430px;
+    height: 108vw;
   }
 
   .family-art {

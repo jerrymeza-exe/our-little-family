@@ -242,10 +242,120 @@ h1 {
 }
 
 .secret-button:focus-visible,
+.portrait-arrow:focus-visible,
+.portrait-dot:focus-visible,
+.portrait-viewport:focus-visible,
 .dialog-close:focus-visible,
 .dialog-ok:focus-visible {
   outline: 3px solid var(--lavender);
   outline-offset: 3px;
+}
+
+.portrait-carousel {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.portrait-viewport {
+  overflow: hidden;
+  padding: 0.8rem 0.8rem 1rem;
+  touch-action: pan-y;
+}
+
+.portrait-track {
+  display: flex;
+  transform: translateX(0);
+  transition: transform 360ms steps(6, end);
+  will-change: transform;
+}
+
+.portrait-slide {
+  min-width: 100%;
+  padding: 0.2rem 1rem 1rem 0.2rem;
+}
+
+.second-memory-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.92), transparent 45%),
+    linear-gradient(160deg, #fff7ed, #ffe5ef 58%, #eee8ff);
+}
+
+.second-memory-art {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.second-memory-art {
+  mix-blend-mode: multiply;
+}
+
+.portrait-carousel-controls {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  gap: 1rem;
+  align-items: center;
+  width: min(100%, 330px);
+  margin: 1rem auto 0;
+}
+
+.portrait-arrow {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 3px solid var(--ink);
+  place-items: center;
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.portrait-arrow:hover {
+  background: var(--pink-soft);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.portrait-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.portrait-dot {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  background: #fff;
+  cursor: pointer;
+  transform: rotate(45deg);
+}
+
+.portrait-dot.is-active {
+  background: var(--pink);
+  box-shadow: 3px 3px 0 var(--lavender-soft);
+}
+
+.swipe-hint {
+  margin: 1.2rem 0 0;
+  color: #8a7990;
+  font-size: clamp(0.46rem, 1.4vw, 0.57rem);
+  letter-spacing: 0.08em;
+  line-height: 1.8;
 }
 
 footer {
@@ -450,6 +560,14 @@ footer span {
   .portrait-caption {
     padding: 1rem 2.7rem 0.9rem 0.75rem;
   }
+
+  .portrait-viewport {
+    padding: 0.55rem 0.25rem 0.8rem;
+  }
+
+  .portrait-slide {
+    padding: 0.15rem 0.75rem 0.75rem 0.15rem;
+  }
 }
 
 @media (max-width: 390px) {
@@ -464,6 +582,15 @@ footer span {
   .dog-art {
     right: -3%;
     width: 145px;
+  }
+
+  .portrait-carousel-controls {
+    grid-template-columns: 44px 1fr 44px;
+  }
+
+  .portrait-arrow {
+    width: 44px;
+    height: 44px;
   }
 }
 

@@ -1,10 +1,20 @@
 const heartLayer = document.querySelector(".floating-hearts");
-const secretButton = document.querySelector(".secret-button");
+const secretButtons = document.querySelectorAll("[data-secret-trigger]");
 const loveDialog = document.querySelector(".love-dialog");
 const closeButton = document.querySelector(".dialog-close");
 const okayButton = document.querySelector(".dialog-ok");
 const heartBurst = document.querySelector(".heart-burst");
+const portraitTrack = document.querySelector(".portrait-track");
+const portraitViewport = document.querySelector(".portrait-viewport");
+const portraitSlides = [...document.querySelectorAll(".portrait-slide")];
+const portraitDots = [...document.querySelectorAll(".portrait-dot")];
+const previousPortraitButton = document.querySelector(".portrait-prev");
+const nextPortraitButton = document.querySelector(".portrait-next");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+let activePortrait = 0;
+let swipeStartX = 0;
+let lastSecretTrigger = null;
 
 const heartColors = ["#f277a8", "#d94f88", "#bca7e8", "#f6a9c5"];
 
@@ -67,7 +77,8 @@ function createHeartBurst() {
   });
 }
 
-function openSurprise() {
+function openSurprise(event) {
+  lastSecretTrigger = event?.currentTarget || null;
   if (!loveDialog.open) {
     loveDialog.showModal();
     createHeartBurst();
@@ -76,12 +87,59 @@ function openSurprise() {
 
 function closeSurprise() {
   loveDialog.close();
-  secretButton.focus();
+  lastSecretTrigger?.focus();
 }
 
-secretButton.addEventListener("click", openSurprise);
+function showPortrait(index) {
+  if (!portraitTrack || portraitSlides.length === 0) return;
+
+  activePortrait = (index + portraitSlides.length) % portraitSlides.length;
+  portraitTrack.style.transform = `translateX(-${activePortrait * 100}%)`;
+
+  portraitSlides.forEach((slide, slideIndex) => {
+    const isActive = slideIndex === activePortrait;
+    slide.classList.toggle("is-active", isActive);
+    slide.setAttribute("aria-hidden", String(!isActive));
+  });
+
+  portraitDots.forEach((dot, dotIndex) => {
+    const isActive = dotIndex === activePortrait;
+    dot.classList.toggle("is-active", isActive);
+    dot.setAttribute("aria-current", String(isActive));
+  });
+}
+
+secretButtons.forEach((button) => button.addEventListener("click", openSurprise));
 closeButton.addEventListener("click", closeSurprise);
 okayButton.addEventListener("click", closeSurprise);
+
+previousPortraitButton?.addEventListener("click", () => showPortrait(activePortrait - 1));
+nextPortraitButton?.addEventListener("click", () => showPortrait(activePortrait + 1));
+portraitDots.forEach((dot, index) => {
+  dot.addEventListener("click", () => showPortrait(index));
+});
+
+portraitViewport?.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    showPortrait(activePortrait - 1);
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    showPortrait(activePortrait + 1);
+  }
+});
+
+portraitViewport?.addEventListener("touchstart", (event) => {
+  swipeStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+
+portraitViewport?.addEventListener("touchend", (event) => {
+  const swipeDistance = event.changedTouches[0].clientX - swipeStartX;
+  if (Math.abs(swipeDistance) < 45) return;
+  showPortrait(activePortrait + (swipeDistance < 0 ? 1 : -1));
+}, { passive: true });
 
 loveDialog.addEventListener("click", (event) => {
   if (event.target === loveDialog) closeSurprise();

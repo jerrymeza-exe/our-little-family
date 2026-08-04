@@ -31,39 +31,107 @@
         </div>
       </header>
 
-      <section class="portrait-card" aria-label="Our pixel-art family portrait">
-        <span class="pixel-corner corner-one" aria-hidden="true">+</span>
-        <span class="pixel-corner corner-two" aria-hidden="true">+</span>
+      <section
+        class="portrait-carousel"
+        aria-label="Our pixel-art family memories"
+        aria-roledescription="carousel"
+      >
+        <div
+          class="portrait-viewport"
+          tabindex="0"
+          aria-label="Swipe horizontally or use the arrow keys to change photos."
+        >
+          <div class="portrait-track">
+            <article
+              class="portrait-slide is-active"
+              aria-roledescription="slide"
+              aria-label="1 of 2"
+              aria-hidden="false"
+            >
+              <div class="portrait-card">
+                <span class="pixel-corner corner-one" aria-hidden="true">+</span>
+                <span class="pixel-corner corner-two" aria-hidden="true">+</span>
 
-        <div class="portrait-stage">
-          <img
-            class="scene-art"
-            src="sunset-background.png"
-            alt=""
-            aria-hidden="true"
-          />
-          <img
-            class="family-art"
-            src="family-transparent.png"
-            alt="A pixel-art portrait of our family standing together"
-          />
-          <img
-            class="dog-art"
-            src="dog-transparent.png"
-            alt="Our happy pixel-art dog standing with the family"
-          />
+                <div class="portrait-stage">
+                  <img
+                    class="scene-art"
+                    src="sunset-background.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <img
+                    class="family-art"
+                    src="family-transparent.png"
+                    alt="A pixel-art portrait of our family standing together"
+                  />
+                  <img
+                    class="dog-art"
+                    src="dog-transparent.png"
+                    alt="Our happy pixel-art dog standing with the family"
+                  />
+                </div>
+
+                <p class="portrait-caption">HOME IS WHEREVER I'M WITH YOU</p>
+
+                <button
+                  class="secret-button"
+                  type="button"
+                  data-secret-trigger
+                  aria-label="Open a tiny hidden surprise"
+                  aria-haspopup="dialog"
+                >
+                  <span aria-hidden="true">✦</span>
+                </button>
+              </div>
+            </article>
+
+            <article
+              class="portrait-slide"
+              aria-roledescription="slide"
+              aria-label="2 of 2"
+              aria-hidden="true"
+            >
+              <div class="portrait-card">
+                <span class="pixel-corner corner-one" aria-hidden="true">+</span>
+                <span class="pixel-corner corner-two" aria-hidden="true">+</span>
+
+                <div class="portrait-stage second-memory-stage">
+                  <img
+                    class="second-memory-art"
+                    src="birthday-family.png"
+                    alt="Our family together for a special birthday memory"
+                  />
+                </div>
+
+                <p class="portrait-caption">CELEBRATING OUR LITTLE ONE’S FIRST BIRTHDAY</p>
+
+                <button
+                  class="secret-button"
+                  type="button"
+                  data-secret-trigger
+                  aria-label="Open a tiny hidden surprise"
+                  aria-haspopup="dialog"
+                >
+                  <span aria-hidden="true">✦</span>
+                </button>
+              </div>
+            </article>
+          </div>
         </div>
 
-        <p class="portrait-caption">HOME IS WHEREVER I'M WITH YOU</p>
-
-        <button
-          class="secret-button"
-          type="button"
-          aria-label="Open a tiny hidden surprise"
-          aria-haspopup="dialog"
-        >
-          <span aria-hidden="true">✦</span>
-        </button>
+        <div class="portrait-carousel-controls">
+          <button class="portrait-arrow portrait-prev" type="button" aria-label="Previous photo">
+            <span aria-hidden="true">&lt;</span>
+          </button>
+          <div class="portrait-dots" aria-label="Choose a photo">
+            <button class="portrait-dot is-active" type="button" aria-label="Show photo 1" aria-current="true"></button>
+            <button class="portrait-dot" type="button" aria-label="Show photo 2" aria-current="false"></button>
+          </div>
+          <button class="portrait-arrow portrait-next" type="button" aria-label="Next photo">
+            <span aria-hidden="true">&gt;</span>
+          </button>
+        </div>
+        <p class="swipe-hint" aria-hidden="true">SWIPE FOR ANOTHER MEMORY →</p>
       </section>
 
       <footer>
